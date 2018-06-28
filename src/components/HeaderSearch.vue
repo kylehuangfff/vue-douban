@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#keyword {
+    font-size: 14px;
+}
 header {
     position: fixed;
     left: 0;
