@@ -1,6 +1,12 @@
-# vue mobile
+# 豆瓣Vuejs版
 
-> A minimal vue mobile template with axios & eslint & mockjs
+<p align="center">
+扫码预览
+</p>
+
+<p align="center">
+	<img src="/qrcode.png">
+</p>
 
 ## Build Setup
 
