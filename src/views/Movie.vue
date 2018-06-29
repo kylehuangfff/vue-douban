@@ -1,5 +1,5 @@
 <template>
-    <div class="movie-con">
+    <div class="list-con">
         <header-search placeHolder="电影名" stype="movie"></header-search>
         <loading v-show="!!isLoading" />
         <section v-if="inTheaters && inTheaters.length > 0">
@@ -9,9 +9,9 @@
             </header>
             <div class="section-content">
                 <ul class="row items">
-                    <li class="item" v-for="item in inTheaters" :key="item.id">
+                    <li class="item" v-for="item in inTheaters" :key="parseInt(item.id)">
                         <router-link :to="'/movie/subject/' + item.id">
-                            <div class="item-image"><img :src="item.images.small" @error="this.src='../assets/images/nopic.png';" /></div>
+                            <div class="item-image"><img v-lazy="utils.imgProxy(item.images.small)" /></div>
                             <span class="item-title">{{item.title}}</span>
                             <rating-stars :rating="item.rating"></rating-stars>
                         </router-link>
@@ -26,9 +26,9 @@
             </header>
             <div class="section-content">
                 <ul class="row items">
-                    <li class="item" v-for="item in comingSoon" :key="item.id">
+                    <li class="item" v-for="item in comingSoon" :key="parseInt(item.id)">
                         <router-link :to="'/movie/subject/' + item.id">
-                            <div class="item-image"><img :src="item.images.small" /></div>
+                            <div class="item-image"><img v-lazy="utils.imgProxy(item.images.small)" /></div>
                             <span class="item-title">{{item.title}}</span>
                             <rating-stars :rating="item.rating"></rating-stars>
                         </router-link>
@@ -52,10 +52,13 @@
 </template>
 
 <script>
+import '@/assets/css/channel.scss';
+
 import Api from '@/api';
-import HeaderSearch from '@/components/HeaderSearch.vue';
-import RatingStars from '@/components/RatingStars.vue';
-import Loading from '@/components/Loading.vue';
+import HeaderSearch from '@/components/HeaderSearch';
+import RatingStars from '@/components/RatingStars';
+import Loading from '@/components/Loading';
+import utils from '@/utils/common';
 
 export default {
     name: 'Movie',
@@ -71,6 +74,7 @@ export default {
     },
     data () {
         return {
+            utils,
             inTheaters: [],
             comingSoon: [],
             isLoading: false
@@ -79,127 +83,40 @@ export default {
     created: function () {
 
         this.isLoading = true;
-        let count = 2;
 
-        Api.jsonp('https://api.douban.com/v2/movie/in_theaters?count=20&city=厦门')
-        .then(res=>{
-            count--;
-            !count && (this.isLoading = false);
-            this.inTheaters = res.subjects;
+        let queue = new utils.Queue();
 
-        })
-        .catch(err=>{
-            count--;
-            !count && (this.isLoading = false);
-            console.log(err);
-        });
+        queue.run(()=>{
+            Api.jsonp('https://api.douban.com/v2/movie/in_theaters?count=20&city=厦门')
+            .then(res=>{
+                this.inTheaters = res.subjects;
 
-        Api.jsonp('https://api.douban.com/v2/movie/coming_soon')
-        .then(res=>{
-            count--;
-            !count && (this.isLoading = false);
-            this.comingSoon = res.subjects;
-        })
-        .catch(err=>{
-            count--;
-            !count && (this.isLoading = false);
-            console.log(err);
-        });
+                queue.next();
+            })
+            .catch(err=>{
+                console.log(err);
+                queue.next();
+            });
+        }).run(()=>{
+            Api.jsonp('https://api.douban.com/v2/movie/coming_soon')
+            .then(res=>{
+                this.comingSoon = res.subjects;
+                queue.next();
+            })
+            .catch(err=>{
+                console.log(err);
+                queue.next();
+            });
+        }).run(()=>{
+            this.isLoading = false;
+        }).start();
     },
     methods: {
-        search: function (e) {
-
-        }
+        
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.movie-con {
-    padding-top: 46px;
-}
-section header {
-    padding: 0 0.4rem;
-    line-height: 1rem;
 
-    h2 {
-        display: inline-block;
-        color: #111;
-        font-size: 0.46rem;
-    }
-
-    a {
-        color: #42bd56;
-        float: right;
-        font-size: 0.4rem;
-    }
-}
-
-section .section-content {
-    margin-bottom: 0.5rem;
-
-    .row {
-        white-space: nowrap;
-        overflow-x: auto;
-        margin: 0 16px;
-
-        .item {
-            display: inline-block;
-            text-align: center;
-            width: 100px;
-            margin-right: 5px;
-
-            .item-image {
-                width: 100px;
-                height: 150px;
-                margin-bottom: 5px;
-                overflow: hidden;
-            }
-            img {
-                height: 100%;
-            }
-        }
-
-        .item-title {
-            font-size: 0.4rem;
-            color: #111;
-            display: block;
-            margin-bottom: 0.05rem;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    }
-}
-
-.type-list {
-    padding: 0;
-    color: #eee;
-    font-size: 14px;
-    overflow: hidden;
-    margin-left: 20px;
-    padding: 5px 0 0 2px;
-}
-.type-list li {
-    width: 47%;
-    border: solid 1px #eee;
-    float: left;
-    height: 40px;
-    margin: -1PX 0 0 -1PX;
-}
-.type-list a {
-    color: #42bd56;
-    display: block;
-    line-height: 40px;
-    padding-left: 20px;
-}
-.type-list span {
-    color: #ccc;
-    float: right;
-    font-size: 18px;
-    margin: 10px 10px 0 0;
-}
-.type-list li:last-child, .type-list li:nth-last-child(2) {
-    border-bottom: solid 1px #eee;
-}
 </style>

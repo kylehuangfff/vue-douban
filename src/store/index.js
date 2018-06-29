@@ -12,14 +12,6 @@ let Movie = {
         cateList: ['动作', '喜剧', '爱情', '悬疑', '恐怖', '科幻', '治愈', '文艺', '成长', '动画']
     },
     mutations: {
-        setKeyword (state, keyword) {
-            state.keyword = keyword;
-            state.tag = '';
-        },
-        setTag (state, tag) {
-            state.tag = tag;
-            state.keyword = '';
-        },
         setPage (state, page) {
             state.page = page;
         },
@@ -35,17 +27,20 @@ let Movie = {
 let Book = {
     namespaced: true,
     state: {
-        keyword: '',
-        tag: ''
+        page: 1,
+        size: 18,
+        scrollTop: 0,
+        cateList: ['小说', '心理', '爱情', '历史', '青春', '励志', '随笔', '传记', '推理', '旅行', '奇幻', '经济', '管理', '创业']
     },
     mutations: {
-        setKeyword (state, keyword) {
-            state.keyword = keyword;
-            state.tag = '';
+        setPage (state, page) {
+            state.page = page;
         },
-        setTag (state, tag) {
-            state.tag = tag;
-            state.keyword = '';
+        setScrollTop (state, scrollTop) {
+            state.scrollTop = scrollTop;
+        },
+        setSize (state, size) {
+            state.size = size;
         }
     }
 };

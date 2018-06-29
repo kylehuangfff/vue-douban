@@ -40,7 +40,9 @@ export default new Router({
     }, {
         path: '/book',
         name: 'Book',
-        component: Book
+        components: {
+            book: Book
+        }
     }, {
         path: '/book/subject/:id',
         name: 'BookSubject',

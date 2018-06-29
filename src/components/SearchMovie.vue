@@ -2,10 +2,9 @@
     <ul class="items">
         <li class="item" v-for="(item, index) in list" :key="parseInt(item.id + '' + index)">
             <router-link :to="'/movie/subject/' + item.id" @click.native="$emit('viewSubject')">
-                <div class="item-image"><img v-lazy="item.images.small" /></div>
+                <div class="item-image"><img v-lazy="utils.imgProxy(item.images.small)" /></div>
                 <span class="item-title">{{item.title}}</span>
                 <rating-stars :rating="item.rating"></rating-stars>
-                <p>{{item.summary}}</p>
             </router-link>
         </li>
     </ul>
@@ -14,6 +13,7 @@
 <script>
 import Api from '@/api';
 import RatingStars from '@/components/RatingStars.vue';
+import utils from '@/utils/common';
 
 export default {
     name: 'Movie',
@@ -22,13 +22,17 @@ export default {
         RatingStars
     },
     data () {
-        return {};
+        return {
+            utils
+        };
     },
-    created: function () {
-
+    created () {
+        
     },
     methods: {
-        
+        imgProxy (url) {
+            return utils.imgProxy(url);
+        }
     }
 };
 </script>

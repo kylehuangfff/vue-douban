@@ -46,7 +46,7 @@ export default {
             return ({
                 'movie': '电影名',
                 'music': '音乐名',
-                'book': '书名'
+                'book': '书名/作者/ISBN'
             })[this.type];
         },
         cate () {
@@ -54,6 +54,13 @@ export default {
                 'movie': '电影',
                 'music': '音乐',
                 'book': '图书'
+            })[this.type];
+        },
+        listField () {
+            return  ({
+                'movie': 'subjects',
+                'music': 'musics',
+                'book': 'books'
             })[this.type];
         },
         searchComponent () {
@@ -77,12 +84,12 @@ export default {
 
             this.isLoading = true;
 
-            Api.jsonp(`https://api.douban.com/v2/movie/search?${this.field}=${this.keyword}&count=${this.size}&start=${this.size*(this.page-1)}`)
+            Api.jsonp(`https://api.douban.com/v2/${this.type}/search?${this.field}=${this.keyword}&count=${this.size}&start=${this.size*(this.page-1)}`)
             .then(res=>{
 
                 this.isLoading = false;
 
-                this.list = [...this.list, ...res.subjects];
+                this.list = [...this.list, ...res[this.listField]];
 
                 sessionStorage.setItem(this.cacheKey, JSON.stringify({page: this.page, list: this.list}));
 

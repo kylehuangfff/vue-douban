@@ -4,6 +4,9 @@
         <keep-alive>
             <router-view name="movie"/>
         </keep-alive>
+        <keep-alive>
+            <router-view name="book"/>
+        </keep-alive>
     </div>
 </template>
 

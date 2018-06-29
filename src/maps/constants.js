@@ -1,2 +1,4 @@
 // 全局常量
-export const USER_TOKEN = 'Admin-Token'
+export default {
+    IMAGE_PROXY: 'http://42.121.107.173:82/proxy.php'
+} 

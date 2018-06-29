@@ -1,0 +1,88 @@
+.list-con {
+    padding-top: 46px;
+}
+section header {
+    padding: 0 12px;
+    line-height: 40px;
+
+    h2 {
+        display: inline-block;
+        color: #111;
+        font-size: 18px;
+    }
+
+    a {
+        color: #42bd56;
+        float: right;
+        font-size: 18px;
+    }
+}
+
+section .section-content {
+    margin-bottom: 18px;
+
+    .row {
+        white-space: nowrap;
+        overflow-x: auto;
+        margin: 0 16px;
+
+        .item {
+            display: inline-block;
+            text-align: center;
+            width: 100px;
+            margin-right: 10px;
+
+            .item-image {
+                width: 100px;
+                height: 150px;
+                margin-bottom: 5px;
+                overflow: hidden;
+            }
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .item-title {
+            font-size: 14px;
+            color: #111;
+            display: block;
+            margin-bottom: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.type-list {
+    padding: 0;
+    color: #eee;
+    font-size: 14px;
+    overflow: hidden;
+    margin-left: 20px;
+    padding: 5px 0 0 2px;
+}
+.type-list li {
+    width: 47%;
+    border: solid 1px #eee;
+    float: left;
+    height: 40px;
+    margin: -1PX 0 0 -1PX;
+}
+.type-list a {
+    color: #42bd56;
+    display: block;
+    line-height: 40px;
+    padding-left: 20px;
+}
+.type-list span {
+    color: #ccc;
+    float: right;
+    font-size: 18px;
+    margin: 10px 10px 0 0;
+}
+.type-list li:last-child, .type-list li:nth-last-child(2) {
+    border-bottom: solid 1px #eee;
+}
