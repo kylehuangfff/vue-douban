@@ -13,7 +13,7 @@
 扫码体验
 </p>
 <p align="center">
-	<img src="/qrcode.png">
+	<img src="./screenshot/qrcode.png">
 </p>
 
 ## Build Setup
