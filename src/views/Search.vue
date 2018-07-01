@@ -15,10 +15,11 @@
 
 <script>
 import Api from '@/api';
-import HeaderSearch from '@/components/HeaderSearch.vue';
-import Loading from '@/components/Loading.vue';
-import SearchMovie from '@/components/SearchMovie.vue';
-import SearchBook from '@/components/SearchBook.vue';
+import HeaderSearch from '@/components/HeaderSearch';
+import Loading from '@/components/Loading';
+import SearchMovie from '@/components/SearchMovie';
+import SearchBook from '@/components/SearchBook';
+import SearchMusic from '@/components/SearchMusic';
 
 export default {
     name: 'Search',
@@ -45,7 +46,7 @@ export default {
         placeHolder () {
             return ({
                 'movie': '电影名',
-                'music': '音乐名',
+                'music': '音乐/歌手',
                 'book': '书名/作者/ISBN'
             })[this.type];
         },
@@ -69,6 +70,8 @@ export default {
                     return SearchMovie;
                 case 'book':
                     return SearchBook;
+                case 'music':
+                    return SearchMusic;
             }
         },
         cacheKey () {
@@ -107,7 +110,7 @@ export default {
             let winHeight = document.documentElement.clientHeight;
             let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 
-            if(scrollTop + winHeight > docHeight - 50 && !this.isLoading) {
+            if(scrollTop + winHeight > docHeight - 120 && !this.isLoading) {
 
                 this.$store.commit(`${this.type}/setPage`, this.page + 1);
 

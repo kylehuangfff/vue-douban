@@ -32,7 +32,9 @@ export default new Router({
     }, {
         path: '/music',
         name: 'Music',
-        component: Music
+        components: {
+            music: Music
+        }
     }, {
         path: '/music/subject/:id',
         name: 'MusicSubject',

@@ -88,18 +88,26 @@ export default {
     },
     created: function () {
 
+        let tmpList = [];
+
         let loadData = (index)=>{
 
             let cur = this.allList[index];
 
             if(!cur) {
-                this.isLoading = false;
+                setTimeout(()=>{
+                    this.isLoading = false;
+                    this.allList = tmpList;
+                }, 1500);
                 return;
             }
 
             Api.jsonp('https://api.douban.com/v2/book/search?tag=' + cur.tag)
             .then(res=>{
-                cur.list = res.books;
+                tmpList.push({
+                    tag: cur.tag,
+                    list: res.books
+                })
                 loadData(++index);
             })
             .catch(err=>{

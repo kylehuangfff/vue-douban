@@ -39,7 +39,7 @@ const API = {
 			})
 		})
 	},
-	jsonp(url, callback, params = { timeout: 15000 }) {
+	jsonp(url, params = { timeout: 15000 }) {
 		return new Promise((resolve, reject) => {
 			jsonp(url, params, (err, res) => {
 				if (err) {

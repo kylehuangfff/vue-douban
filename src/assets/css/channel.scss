@@ -18,41 +18,40 @@ section header {
     }
 }
 
-section .section-content {
+.section-content {
     margin-bottom: 18px;
 
     .row {
         white-space: nowrap;
         overflow-x: auto;
-        margin: 0 16px;
+        padding: 0 15px;
+    }
 
-        .item {
-            display: inline-block;
-            text-align: center;
+    .item {
+        display: inline-block;
+        text-align: center;
+        width: 100px;
+        margin-right: 5px;
+
+        .item-image {
             width: 100px;
-            margin-right: 10px;
-
-            .item-image {
-                width: 100px;
-                height: 150px;
-                margin-bottom: 5px;
-                overflow: hidden;
-            }
-            img {
-                height: 100%;
-                width: 100%;
-            }
-        }
-
-        .item-title {
-            font-size: 14px;
-            color: #111;
-            display: block;
-            margin-bottom: 2px;
+            height: 150px;
+            margin-bottom: 5px;
             overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
         }
+        img {
+            height: 100%;
+        }
+    }
+
+    .item-title {
+        font-size: 14px;
+        color: #111;
+        display: block;
+        margin-bottom: 2px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
 

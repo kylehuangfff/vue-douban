@@ -8,7 +8,7 @@
                     <span>影院热映</span>
                 </router-link>
             </li>
-            <li v-if="false">
+            <li>
                 <router-link to="/music" style="color: rgb(244, 143, 46);">
                     <strong>音乐</strong>
                     <span>新碟榜</span>

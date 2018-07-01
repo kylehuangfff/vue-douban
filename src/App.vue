@@ -7,6 +7,9 @@
         <keep-alive>
             <router-view name="book"/>
         </keep-alive>
+        <keep-alive>
+            <router-view name="music"/>
+        </keep-alive>
     </div>
 </template>
 
