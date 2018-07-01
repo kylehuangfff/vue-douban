@@ -133,7 +133,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section .section-content .row {
+.section-content .row {
     margin: 0;
+    padding: 0;
+
+    .role {
+        color: #aaa;
+    }
 }
 </style>
