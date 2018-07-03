@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-扫码体验
+扫码体验（豆瓣API限制单个ip每小时只能请求150次。）
 </p>
 <p align="center">
 	<img src="./screenshot/qrcode.png">
